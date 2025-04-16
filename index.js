@@ -20,7 +20,7 @@ app.use(userRoutes)
 
 
 
-const port = process.env.PORT || 4040
+const port = process.env.PORT || 10000
 app.listen (port, () => {
   console.log (`Server is listening on port ${port}`)
 })
