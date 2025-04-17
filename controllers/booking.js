@@ -1,0 +1,33 @@
+import { BookingModel } from "../models/booking.js";
+
+// Create booking
+export const createBooking = async (req, res) => {
+    try {
+      const { title, start, end, notes } = req.body;
+      const userId = req.user.id;
+  
+      const newBooking = new BookingModel({
+        user: userId,
+        title,
+        start,
+        end,
+        notes,
+      });
+  
+      await newBooking.save();
+      res.status(201).json(newBooking);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
+  
+  // Get user's bookings
+  export const getBookings = async (req, res) => {
+    try {
+      const userId = req.user.id;
+      const bookings = await BookingModel.find({ user: userId });
+      res.json(bookings);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
