@@ -7,7 +7,10 @@ import cors from "cors";
 import userRoutes from "./routes/users.js";
 
 
-const database = await mongoose.connect (process.env.MONGO_URI);
+await mongoose.connect(process.env.MONGO_URI);
+console.log("Database connected successfully!");
+// mongoose.connect(process.env.MONGO_URI, {
+//     useNewUrlParser: true,   
 
 
 const app = express()
