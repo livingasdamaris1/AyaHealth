@@ -28,6 +28,37 @@ export const createBooking = async (req, res) => {
       const bookings = await BookingModel.find({ user: userId });
       res.json(bookings);
     } catch (err) {
-      res.status(500).json({ error: err.message });
+      res.status(404).json({ error: err.message });
     }
-  };
+};
+  
+// Delete booking
+export const deleteBooking = async (req, res) => {
+    try {
+      const bookingId = req.params.id;
+      await BookingModel.findByIdAndDelete(bookingId);
+      res.status(204).send();
+    } catch (err) {
+      res.status(404).json({ error: err.message });
+    }
+};
+  
+// Update booking
+
+export const updateBooking = async (req, res) => {  
+    try {
+      const bookingId = req.params.id;
+      const { title, start, end, notes } = req.body;
+  
+      const updatedBooking = await BookingModel.findByIdAndUpdate(
+        bookingId,
+        { title, start, end, notes },
+        { new: true }
+      );
+  
+      res.json(updatedBooking);
+    } catch (err) {
+      res.status(404).json({ error: err.message });
+    }
+}
+// import { BookingModel } from "../models/booking.js";
