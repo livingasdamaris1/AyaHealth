@@ -43,6 +43,24 @@ export const deleteBooking = async (req, res) => {
   }
 };
 
+// get booking by id
+export const getBookingById = async (req, res) => {
+  try {
+    const bookingId = req.params.id;
+    const booking = await BookingModel.findById(bookingId);
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+    res.json(booking);
+  }
+  catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+}
+
+
+
+
 // Update booking
 
 export const updateBooking = async (req, res) => {
