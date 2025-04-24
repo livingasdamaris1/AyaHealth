@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { createBooking, getBookings, deleteBooking, updateBooking } from '../controllers/booking.js';
-import authMiddleware from '../middlewares/auth.js';
+import { isAuthenticated } from '../middlewares/auth.js';
 
 
 // create a booking router
